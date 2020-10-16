@@ -2,7 +2,7 @@
 
 const asyncHandler = require('express-async-handler');
 const auth = require('../../config/middleware/authorization');
-const departamentoController = require('../controllers/empleado');
+const departamentoController = require('../controllers/departamento');
 
 module.exports = (app) => {
   app.get('/api/departamento', auth, asyncHandler(departamentoController.get));

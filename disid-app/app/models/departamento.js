@@ -5,17 +5,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const departamentoSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-  },
-  pass: {
+  name: {
     type: String,
     required: true,
   }
 });
 
-const departamentoModel = mongoose.model('departamento', departamentoSchema);
+const departamentoModel = mongoose.model('Departamento', departamentoSchema);
 
 async function getDepartamento() {
   return departamentoModel.find();

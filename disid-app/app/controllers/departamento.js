@@ -1,6 +1,6 @@
 'use strict';
 
-const empleadoModel = require('../models/empleado');
+const empleadoModel = require('../models/departamento');
 
 async function getEmpleados(req, res) {
   const departamentos = await empleadoModel.get();
@@ -16,12 +16,8 @@ exports.get = getEmpleados;
 async function createDepartamento(req, res) {
   let departamento = req.body;
 
-  if (!departamento.pass) {
+  if (!departamento.name) {
     return res.status(400).send('Password can not be empty');
-  }
-
-  if (!departamento.email) {
-    return res.status(400).send('Email can not be empty');
   }
 
   departamento = await empleadoModel.create(departamento);
