@@ -16,12 +16,12 @@ exports.get = getEmpleados;
 async function createEmpleado(req, res) {
   let empleado = req.body;
 
-  if (!empleado.pass) {
-    return res.status(400).send('Password can not be empty');
+  if (!empleado.name) {
+    return res.status(400).send('Name can not be empty');
   }
 
-  if (!empleado.email) {
-    return res.status(400).send('Email can not be empty');
+  if (!empleado.lastName) {
+    return res.status(400).send('Last name can not be empty');
   }
 
   empleado = await empleadoModel.create(empleado);

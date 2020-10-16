@@ -30,7 +30,7 @@ const empleadoSchema = new Schema({
 const empleadoModel = mongoose.model('Empleado', empleadoSchema);
 
 async function getEmpleados() {
-  return empleadoModel.find().lean().exec();
+  return empleadoModel.find().populate('departamento').lean().exec();
 }
 
 exports.get = getEmpleados;
