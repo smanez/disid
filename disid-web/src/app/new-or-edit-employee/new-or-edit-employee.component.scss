@@ -1,0 +1,18 @@
+.employees {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  text-align: center;
+  .contenido {
+    .buttons {
+      float: right;
+      .button-create {
+        float: right;
+      }
+    }
+    .table-employee {
+      clear: both;
+    }
+    width: 50%
+  }
+}
