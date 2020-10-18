@@ -15,22 +15,22 @@ const empleadoSchema = new Schema({
   },
   age: {
     type: Number,
-    required: true,
   },
   fechaAlta: {
     type: Date,
     default: true,
   },
-  departamento: {
+  department: {
     type: 'ObjectId',
-    ref: 'Departamento',
+    ref: 'Department',
+    required: true,
   },
 });
 
-const empleadoModel = mongoose.model('Empleado', empleadoSchema);
+const empleadoModel = mongoose.model('Employee', empleadoSchema);
 
 async function getEmpleados() {
-  return empleadoModel.find().populate('departamento').lean().exec();
+  return empleadoModel.find().populate('department').lean().exec();
 }
 
 exports.get = getEmpleados;
@@ -46,7 +46,6 @@ async function getEmpleadoById(id) {
 exports.getById = getEmpleadoById;
 
 async function createEmpleado(empleado) {
-  empleado.creationDate = new Date();
   return empleadoModel.create(empleado);
 }
 

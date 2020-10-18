@@ -11,10 +11,10 @@ const departamentoSchema = new Schema({
   }
 });
 
-const departamentoModel = mongoose.model('Departamento', departamentoSchema);
+const departamentoModel = mongoose.model('Department', departamentoSchema);
 
 async function getDepartamento() {
-  return departamentoModel.find();
+  return departamentoModel.find().lean().exec();
 }
 
 exports.get = getDepartamento;

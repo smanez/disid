@@ -8,8 +8,8 @@ var cors = require('cors');
 app.use(cors())
 app.use(express.json());
 
-require('./app/routes/empleado')(app);
-require('./app/routes/departamento')(app);
+require('./app/routes/employee')(app);
+require('./app/routes/department')(app);
 app.listen(config.port, () => {
   console.log('Escuchando en el puerto 3000');
 });
