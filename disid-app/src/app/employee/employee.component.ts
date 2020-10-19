@@ -4,6 +4,7 @@ import { Employee } from './employee.model';
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { Department } from '../department/department.model';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -13,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class EmployeesComponent implements OnInit {
   employees: Employee[];
+  employeesBackUp: Employee[];
+  departments: Department[];
   displayedColumns = ['name', 'lastName', 'age', 'fechaAlta', 'departamento', 'actions'];
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -23,10 +26,19 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.setEmployee(new Employee());
-    const entitiesSubscription = this.service.getAllEmployee()
+    this.service.getAllDepartment()
+    .subscribe(
+      data => {
+        this.departments = data;
+        // this.changeDetectorRefs.detectChanges();
+      },
+      err => console.log(err)
+    );
+    this.service.getAllEmployee()
     .subscribe(
       data => {
         this.employees = data;
+        this.employeesBackUp = this.employees;
       },
       err => console.log(err)
     );
@@ -41,7 +53,7 @@ export class EmployeesComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {});
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        const entitiesSubscription = this.service.deleteEmployee(employee)
+        this.service.deleteEmployee(employee)
         .subscribe(
           data => {
             this.employees = this.employees.filter(item => item._id !== employee._id);
@@ -51,6 +63,15 @@ export class EmployeesComponent implements OnInit {
         );
       }
     });
+  }
+
+  filterEmployeesByName(word: any) {
+    if (word.value) {
+      this.employees = this.employees.filter(employee =>  employee.department?._id === word.value);
+    } else {
+      this.employees = this.employeesBackUp;
+      this.employees = this.employees.filter(employee =>  employee.name.includes(word));
+    }
   }
 
   saluda() {

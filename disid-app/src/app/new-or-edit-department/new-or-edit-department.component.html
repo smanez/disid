@@ -1,22 +1,18 @@
-<!-- 
+
 <div class="employees">
   <div class="contenido">
 		<div class="buttons">
-			<a [routerLink]="['/employee']" class="btn btn-secondary mr-2" mat-raised-button matTooltip="Back to the employee list">
+      <a href="javascript:;" class="btn btn-primary mr-2" color="primary" (click)="onSumbit(false)" mat-raised-button matTooltip="Save & Continue">
+				<span class="hidden-mobile">Save</span>
+			</a>
+			<a [routerLink]="['/departments']" class="btn btn-secondary mr-2" mat-raised-button matTooltip="Back to the employee list">
 				<i class="la la-arrow-left"></i>
 				<span class="hidden-mobile">Back</span>
 			</a>
-			<a href="javascript:;" class="btn btn-secondary mr-2" (click)="reset()" mat-raised-button matTooltip="Reset changes">
-				<i class="la la-cog"></i>
-				<span class="hidden-mobile">Reset</span>
-			</a>
-			<a href="javascript:;" class="btn btn-primary mr-2" color="primary" (click)="onSumbit(false)" mat-raised-button matTooltip="Save & Continue">
-				<span class="hidden-mobile">Save</span>
-			</a>
 		</div>
 
-    <div class="form" *ngIf="employee">
-      <form [formGroup]="employeeForm">
+    <div class="form" *ngIf="department">
+      <form [formGroup]="departmentForm">
         <div>
           <div>
             <div class="">
@@ -25,45 +21,8 @@
                 <mat-error>employee name is
                   <strong>required</strong>
                 </mat-error>
-                <mat-hint align="start">Please enter
-                  <strong>Name</strong>
-                </mat-hint>
-              </mat-form-field>
-              <mat-form-field class="mat-form-field-fluid">
-                <input matInput formControlName="lastName"/>
-                <mat-error>employee name is
-                  <strong>required</strong>
-                </mat-error>
-                <mat-hint align="start">Please enter
-                  <strong>Last name</strong>
-                </mat-hint>
-              </mat-form-field>
-            </div>
-            <div class="col-lg-4">
-              <mat-form-field class="mat-form-field-fluid">
-                <input type="date" matInput formControlName="fechaAlta"/>
-                <mat-hint align="start">Fecha de alta
-                </mat-hint>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-4">
-              <mat-form-field>
-                <mat-select placeholder="Enter entity" formControlName="department" required [(ngModel)]="selected && selected.id">
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let e of departments" [value]="e._id">
-                    {{e.name}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
-            <div *ngIf="!employee.age" class="col-lg-4">
-              <mat-form-field class="mat-form-field-fluid">
-                <input type="number" matInput placeholder="Enter age" formControlName="age"/>
-                <mat-hint align="start">Please enter
-                  <strong>age</strong>
+                <mat-hint align="start">Intoduzca
+                  <strong>Nombre</strong>
                 </mat-hint>
               </mat-form-field>
             </div>
@@ -72,4 +31,4 @@
       </form>
     </div>
   </div>
-</div> -->
+</div>

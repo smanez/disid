@@ -49,8 +49,15 @@ export class AppService {
     return this.http.delete<Department>(`${API_DEPARTMENT_URL}/${department._id}`);
   }
 
-
   getAllDepartment(): Observable<Department[]> {
     return this.http.get<Department[]>(API_DEPARTMENT_URL);
+  }
+
+  createDepartment(department: Department): Observable<Department> {
+    return this.http.post<Department>(API_DEPARTMENT_URL, department);
+  }
+
+  updateDepartment(department: Department): Observable<Department> {
+    return this.http.put<Department>(`${API_DEPARTMENT_URL}/${department._id}`, department);
   }
 }

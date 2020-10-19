@@ -1,9 +1,17 @@
 .employees {
   display: flex;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 7%;
   text-align: center;
   .contenido {
+    .filters {
+      .filter {
+        float: left;
+        margin-right: 10%;
+      }
+      width: 50%;
+      float: left;
+    }
     .buttons {
       .mat-stroked-button {
         margin-right: 0.3em;

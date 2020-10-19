@@ -21,7 +21,7 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.setDepartment(new Department());
-    const entitiesSubscription = this.service.getAllDepartment()
+    this.service.getAllDepartment()
     .subscribe(
       data => {
         this.departments = data;
@@ -32,17 +32,15 @@ export class DepartmentComponent implements OnInit {
   }
 
   editDepartment(department: Department) {
-    debugger
     this.service.setDepartment(department);
-    this.router.navigate(['./departments/edit'], { relativeTo: this.activatedRoute });
+    this.router.navigate(['/departments/edit'], { relativeTo: this.activatedRoute });
   }
 
   deleteDepartment(department: Department) {
-    debugger
     const dialogRef = this.dialog.open(DialogComponent, {});
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        const entitiesSubscription = this.service.deleteDepartment(department)
+        this.service.deleteDepartment(department)
         .subscribe(
           data => {
             this.departments = this.departments.filter(item => item._id !== department._id);

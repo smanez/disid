@@ -1,3 +1,4 @@
+import { NewOrEditDepartmentComponent } from './new-or-edit-department/new-or-edit-department.component';
 import { DepartmentComponent } from './department/department.component';
 import { AppComponent } from './app.component';
 import { EmployeesComponent } from './employee/employee.component';
@@ -9,7 +10,8 @@ import { NewOrEditEmployeeComponent } from './new-or-edit-employee/new-or-edit-e
 const routes: Routes = [
   { path: '', component: EmployeesComponent },
   { path: 'employee/edit', component: NewOrEditEmployeeComponent },
-  { path: 'departments', component: DepartmentComponent }
+  { path: 'departments', component: DepartmentComponent },
+  { path: 'departments/edit', component: NewOrEditDepartmentComponent },
 ];
 
 @NgModule({

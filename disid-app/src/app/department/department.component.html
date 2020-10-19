@@ -2,7 +2,7 @@
 <div class="departments">
   <div class="contenido">
     <div class="buttons">
-      <button [routerLink]="['departments/edit']" mat-raised-button color="primary">Crear departamento</button>
+      <button [routerLink]="['/departments/edit']" mat-raised-button color="primary">Crear departamento</button>
     </div>
     <div class="buttons">
       <button [routerLink]="['']" mat-stroked-button color="primary">Empleados</button>
@@ -23,7 +23,7 @@
           <button (click)="editDepartment(department)" mat-icon-button color="primary" matTooltip="Edit department">
             <mat-icon>create</mat-icon>
           </button>&nbsp;
-          <button mat-icon-button color="warn" matTooltip="Delete user" type="button" (click)="deleteDepartment(department)">
+          <button mat-icon-button color="warn" matTooltip="Delete department" type="button" (click)="deleteDepartment(department)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>

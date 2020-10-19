@@ -28,7 +28,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
     if (!this.employee) {
       this.employee.clear();
     }
-    debugger
+
     this.selected = this.employee.department;
     const datepipe = new DatePipe('en-US');
     this.employeeForm = this.employeeFB.group({
@@ -43,7 +43,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const entitiesSubscription = this.service.getAllDepartment()
+    this.service.getAllDepartment()
     .subscribe(
       data => {
         this.departments = data;
@@ -59,7 +59,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
     this.createForm();
   }
 
-  prepareUser(): Employee {
+  prepareEmployee(): Employee {
     const controls = this.employeeForm.controls;
     const newEmployee = new Employee();
     newEmployee._id = this.employee?._id;
@@ -72,7 +72,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
   }
 
   createEmployee(newEmployee: Employee) {
-    const entitiesSubscription = this.service.createEmployee(newEmployee)
+    this.service.createEmployee(newEmployee)
     .subscribe(
       data => {
         alert('Empleado creado');
@@ -85,7 +85,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
   }
 
   updateEmoployee(employee: Employee) {
-    const entitiesSubscription = this.service.updateEmployee(employee)
+    this.service.updateEmployee(employee)
     .subscribe(
       data => {
         alert('Empleado actualizado');
@@ -111,7 +111,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
       return;
     }
 
-    const editedEmploye = this.prepareUser();
+    const editedEmploye = this.prepareEmployee();
 
     if (editedEmploye._id) {
       this.updateEmoployee(editedEmploye);

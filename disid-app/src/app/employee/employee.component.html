@@ -1,6 +1,19 @@
 
 <div class="employees">
   <div class="contenido">
+    <div class="filters">
+      <mat-form-field class="filter">
+        <input matInput (input)="filterEmployeesByName($event.target.value)" placeholder="Filtrar por nombre"/>
+      </mat-form-field>
+      <mat-form-field class="filter">
+        <mat-select placeholder="filtrar por departamento" (selectionChange)="filterEmployeesByName($event)">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let e of departments" [value]="e._id">
+            {{e.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="buttons">
       <button [routerLink]="['employee/edit']" mat-raised-button color="primary">Crear empleado</button>
     </div>
@@ -38,7 +51,7 @@
           <button (click)="editEmployee(employee)" mat-icon-button color="primary" matTooltip="Edit employee">
             <mat-icon>create</mat-icon>
           </button>&nbsp;
-          <button mat-icon-button color="warn" matTooltip="Delete user" type="button" (click)="deleteEmpleado(employee)">
+          <button mat-icon-button color="warn" matTooltip="Delete employee" type="button" (click)="deleteEmpleado(employee)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
