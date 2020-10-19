@@ -72,10 +72,6 @@ async function updateEmpleado(empleado) {
     params.$set.age = empleado.age;
   }
 
-  if (empleado.fechaAlta) {
-    params.$set.fechaAlta = empleado.fechaAlta;
-  }
-
   if (empleado.department) {
     params.$set.department = empleado.department;
   }

@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const departamentoSchema = new Schema({
+const departmentSchema = new Schema({
   name: {
     type: String,
     required: true,
   }
 });
 
-const departmentModel = mongoose.model('Department', departamentoSchema);
+const departmentModel = mongoose.model('Department', departmentSchema);
 
 async function getDepartment() {
   return departmentModel.find().lean().exec();
@@ -19,7 +19,7 @@ async function getDepartment() {
 
 exports.get = getDepartment;
 
-async function getDepartamentoById(id) {
+async function getDepartmentById(id) {
   const query = {
     _id: id,
   };
@@ -27,7 +27,7 @@ async function getDepartamentoById(id) {
   return departmentModel.findOne(query).lean().exec();
 }
 
-exports.getById = getDepartamentoById;
+exports.getById = getDepartmentById;
 
 async function getDepartmentByName(name) {
   const query = {
@@ -39,23 +39,25 @@ async function getDepartmentByName(name) {
 
 exports.getBytoName = getDepartmentByName;
 
-async function createDepartment(departamento) {
-  departamento.creationDate = new Date();
-  return departmentModel.create(departamento);
+async function createDepartment(department) {
+  department.creationDate = new Date();
+  return departmentModel.create(department);
 }
 
 exports.create = createDepartment;
 
-async function updateDepartment(departamento) {
+async function updateDepartment(department) {
   const query = {
-    _id: departamento._id,
+    _id: department._id,
   };
 
-  const params = {};
+  const params = {
+    $set:{},
+  };
 
 
-  if (departamento.password) {
-    params.$set.password = departamento.password;
+  if (department.name) {
+    params.$set.name = department.name;
   }
 
   return departmentModel.findOneAndUpdate(query, params, { new: true }).lean().exec();

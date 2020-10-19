@@ -20,31 +20,21 @@ async function createdepartment(req, res) {
     return res.status(400).send('Password can not be empty');
   }
 
-  department = await departmentModel.createDepartment(department);
+  department = await departmentModel.create(department);
   return res.send(department);
 }
 
 exports.create = createdepartment;
 
 async function updateDepartment(req, res) {
-  const id = req.params.id;
-  const departmentDb = await departmentModel.getById(id);
-  if (!departmentDb) {
-    return res.status(404).send('department not found');
-  }
-
-  let department = req.body;
-  department._id = id;
-  delete department.password;
-
-  department = await departmentModel.updateDepartment(department);
+  const department = await departmentModel.update(req.body);
   return res.send(department);
 }
 
 exports.update = updateDepartment;
 
 async function deleteDepartment(req, res) {
-  const department = await departmentModel.deleteDepartment(req.params.id);
+  const department = await departmentModel.delete(req.params.id);
   return res.send(department);
 }
 
