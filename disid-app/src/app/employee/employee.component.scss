@@ -1,0 +1,21 @@
+.employees {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  text-align: center;
+  .contenido {
+    .buttons {
+      .mat-stroked-button {
+        margin-right: 0.3em;
+      }
+      float: right;
+      .button-create {
+        float: right;
+      }
+    }
+    .table-employee {
+      clear: both;
+    }
+    width: 70%
+  }
+}

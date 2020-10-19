@@ -1,0 +1,25 @@
+.employees {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  text-align: center;
+  .contenido {
+    width: 50%;
+    .buttons {
+      width: 93%;
+      .mat-raised-button {
+        float: right;
+      }
+      margin-bottom: 5%;
+    }
+    form {
+      clear: both;
+    }
+    .mat-form-field {
+      display: inline-table;
+      width: 45%;
+      float: left;
+      padding: 1%;
+    }
+  }
+}

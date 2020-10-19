@@ -1,0 +1,71 @@
+
+<div class="employees">
+  <div class="contenido">
+		<div class="buttons">
+      <a href="javascript:;" class="btn btn-primary mr-2" color="primary" (click)="onSumbit(false)" mat-raised-button matTooltip="Save & Continue">
+				<span class="hidden-mobile">Save</span>
+			</a>
+			<a [routerLink]="['']" class="btn btn-secondary mr-2" mat-raised-button matTooltip="Back to the employee list">
+				<i class="la la-arrow-left"></i>
+				<span class="hidden-mobile">Back</span>
+			</a>
+		</div>
+
+    <div class="form" *ngIf="employee">
+      <form [formGroup]="employeeForm">
+        <div>
+          <div>
+            <div class="">
+              <mat-form-field>
+                <input matInput formControlName="name"/>
+                <mat-error>Campo
+                  <strong>obligatorio</strong>
+                </mat-error>
+                <mat-hint align="start">Introduce
+                  <strong>Nombre</strong>
+                </mat-hint>
+              </mat-form-field>
+              <mat-form-field class="mat-form-field-fluid">
+                <input matInput formControlName="lastName"/>
+                <mat-error>Campo
+                  <strong>obligatorio</strong>
+                </mat-error>
+                <mat-hint align="start">Introduce
+                  <strong>Apellidos</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-4">
+              <mat-form-field class="mat-form-field-fluid">
+                <input type="{{employee.fechaAlta ? 'test' : 'date'}}" matInput formControlName="fechaAlta"/>
+                <mat-hint align="start">Fecha de alta
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-4">
+              <mat-form-field>
+                <mat-select placeholder="Seleccione departamento" formControlName="department" required [(ngModel)]="selected">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let e of departments" [value]="e._id">
+                    {{e.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-lg-4">
+              <mat-form-field class="mat-form-field-fluid">
+                <input type="number" matInput placeholder="Enter age" formControlName="age"/>
+                <mat-hint align="start">Introduce
+                  <strong>edad</strong>
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

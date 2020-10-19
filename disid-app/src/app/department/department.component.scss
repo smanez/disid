@@ -1,0 +1,21 @@
+.departments {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  text-align: center;
+  .contenido {
+    .buttons {
+      .mat-stroked-button {
+        margin-right: 0.3em;
+      }
+      float: right;
+      .button-create {
+        float: right;
+      }
+    }
+    .table-department {
+      clear: both;
+    }
+    width: 40%
+  }
+}
