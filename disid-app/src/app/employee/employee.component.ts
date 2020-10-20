@@ -17,7 +17,7 @@ export class EmployeesComponent implements OnInit {
   employeesBackUp: Employee[];
   departments: Department[];
   displayedColumns = ['name', 'lastName', 'age', 'fechaAlta', 'departamento', 'actions'];
-  employeeFiter =  { name: '', department: '', antiquity: new Date() };
+  employeeFiter =  { name: '', department: '', antiquity: new Date(1900) };
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
