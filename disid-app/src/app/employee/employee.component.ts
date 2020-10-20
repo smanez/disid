@@ -3,7 +3,7 @@ import { AppService } from '../app.service';
 import { Employee } from './employee.model';
 import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Department } from '../department/department.model';
 @Component({
   selector: 'app-employee',
@@ -17,6 +17,7 @@ export class EmployeesComponent implements OnInit {
   employeesBackUp: Employee[];
   departments: Department[];
   displayedColumns = ['name', 'lastName', 'age', 'fechaAlta', 'departamento', 'actions'];
+  employeeFiter =  { name: '', department: '', antiquity: new Date() };
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -50,14 +51,18 @@ export class EmployeesComponent implements OnInit {
   }
 
   deleteEmpleado(employee: Employee) {
-    const dialogRef = this.dialog.open(DialogComponent, {});
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      delete: true,
+      desc: '¿Está seguro que desea eliminar este departamento?'
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.service.deleteEmployee(employee)
         .subscribe(
           data => {
             this.employees = this.employees.filter(item => item._id !== employee._id);
-            alert('Eliminado');
           },
           err => console.log(err)
         );
@@ -65,13 +70,30 @@ export class EmployeesComponent implements OnInit {
     });
   }
 
-  filterEmployeesByName(word: any) {
-    if (word.value) {
-      this.employees = this.employees.filter(employee =>  employee.department?._id === word.value);
-    } else {
+  filterEmployees() {
+    if (this.employeeFiter) {
       this.employees = this.employeesBackUp;
-      this.employees = this.employees.filter(employee =>  employee.name.includes(word));
+      this.employees = this.employees.filter(employee =>
+        employee.name.includes(this.employeeFiter.name) &&
+        new Date(employee.fechaAlta).getTime() >= this.employeeFiter.antiquity?.getTime() &&
+        (employee.department?._id === this.employeeFiter.department || !this.employeeFiter.department)
+      );
     }
+  }
+
+  filterEmployeesByName(word: any) {
+    this.employeeFiter.name = word;
+    this.filterEmployees();
+  }
+
+  filterEmployeesByAntiquity(date: Date) {
+    this.employeeFiter.antiquity = date;
+    this.filterEmployees();
+  }
+
+  filterEmployeesByDepartment(word: any) {
+    this.employeeFiter.department = word.value;
+    this.filterEmployees();
   }
 
   saluda() {

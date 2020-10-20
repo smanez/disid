@@ -6,12 +6,15 @@
         <input matInput (input)="filterEmployeesByName($event.target.value)" placeholder="Filtrar por nombre"/>
       </mat-form-field>
       <mat-form-field class="filter">
-        <mat-select placeholder="filtrar por departamento" (selectionChange)="filterEmployeesByName($event)">
+        <mat-select placeholder="filtrar por departamento" (selectionChange)="filterEmployeesByDepartment($event)">
           <mat-option>--</mat-option>
           <mat-option *ngFor="let e of departments" [value]="e._id">
             {{e.name}}
           </mat-option>
         </mat-select>
+      </mat-form-field>
+      <mat-form-field class="filter">
+        <input type="date" matInput (input)="filterEmployeesByAntiquity($event.target.valueAsDate)" placeholder="Filtrar por Fecha de alta"/>
       </mat-form-field>
     </div>
     <div class="buttons">

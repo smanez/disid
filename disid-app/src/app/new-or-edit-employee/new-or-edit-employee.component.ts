@@ -5,6 +5,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { DatePipe } from '@angular/common';
 import { AppService } from '../app.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-new-or-edit-employee',
   templateUrl: './new-or-edit-employee.component.html',
@@ -23,6 +26,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
     private service: AppService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    public dialog: MatDialog,
     ) { }
   createForm() {
     if (!this.employee) {
@@ -35,7 +39,7 @@ export class NewOrEditEmployeeComponent implements OnInit {
       name: [this.employee.name, Validators.required],
       lastName: [this.employee.lastName, Validators.required],
       age: [this.employee.age],
-      department: [this.employee.department, Validators.required],
+      department: [this.employee.department],
       fechaAlta: new FormControl({
         value: datepipe.transform(this.employee.fechaAlta, 'dd/MM/y HH:MM'), disabled: this.employee.fechaAlta
       }),
@@ -72,11 +76,16 @@ export class NewOrEditEmployeeComponent implements OnInit {
   }
 
   createEmployee(newEmployee: Employee) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      desc: 'Empleado editado',
+    };
     this.service.createEmployee(newEmployee)
     .subscribe(
       data => {
-        alert('Empleado creado');
+        const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
         setTimeout(() => {
+          this.dialog.closeAll();
           this.router.navigate([''], { relativeTo: this.activatedRoute });
          }, 2000);
       },
@@ -85,11 +94,16 @@ export class NewOrEditEmployeeComponent implements OnInit {
   }
 
   updateEmoployee(employee: Employee) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      desc: 'Empleado editado',
+    };
     this.service.updateEmployee(employee)
     .subscribe(
       data => {
-        alert('Empleado actualizado');
+        const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
         setTimeout(() => {
+          this.dialog.closeAll();
           this.router.navigate([''], { relativeTo: this.activatedRoute });
          }, 2000);
       },

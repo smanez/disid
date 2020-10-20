@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { Department } from './department.model';
@@ -37,14 +37,18 @@ export class DepartmentComponent implements OnInit {
   }
 
   deleteDepartment(department: Department) {
-    const dialogRef = this.dialog.open(DialogComponent, {});
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      delete: true,
+      desc: '¿Está seguro que desea eliminar este departamento?'
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.service.deleteDepartment(department)
         .subscribe(
           data => {
             this.departments = this.departments.filter(item => item._id !== department._id);
-            alert('Eliminado');
           },
           err => console.log(err)
         );

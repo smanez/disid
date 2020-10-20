@@ -46,7 +46,7 @@
           <div class="form-group row">
             <div class="col-lg-4">
               <mat-form-field>
-                <mat-select placeholder="Seleccione departamento" formControlName="department" required [(ngModel)]="selected">
+                <mat-select placeholder="Seleccione departamento" formControlName="department" [(ngModel)]="selected && selected._id">
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let e of departments" [value]="e._id">
                     {{e.name}}

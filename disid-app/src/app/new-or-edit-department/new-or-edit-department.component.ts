@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { Department } from '../department/department.model';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-new-or-edit-department',
@@ -21,6 +23,7 @@ export class NewOrEditDepartmentComponent implements OnInit {
     private service: AppService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    public dialog: MatDialog,
     ) { }
   createForm() {
     if (!this.department) {
@@ -51,11 +54,16 @@ export class NewOrEditDepartmentComponent implements OnInit {
   }
 
   createEmployee(newDepartment: Department) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      desc: 'Departamento Creado',
+    };
     this.service.createDepartment(newDepartment)
     .subscribe(
       data => {
-        alert('Empleado creado');
+        const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
         setTimeout(() => {
+          this.dialog.closeAll();
           this.router.navigate(['/departments'], { relativeTo: this.activatedRoute });
          }, 2000);
       },
@@ -64,11 +72,16 @@ export class NewOrEditDepartmentComponent implements OnInit {
   }
 
   updateEmoployee(department: Department) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      desc: 'Departamento editado',
+    };
     this.service.updateDepartment(department)
     .subscribe(
       data => {
-        alert('Empleado actualizado');
+        const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
         setTimeout(() => {
+          this.dialog.closeAll();
           this.router.navigate(['/departments'], { relativeTo: this.activatedRoute });
          }, 2000);
       },
