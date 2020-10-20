@@ -23,7 +23,6 @@ const empleadoSchema = new Schema({
   department: {
     type: 'ObjectId',
     ref: 'Department',
-    required: true,
   },
 });
 
