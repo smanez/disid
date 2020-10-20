@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "DebuggerMan2",
-      "program": "${workspaceFolder}/disid-app/app.js",
+      "program": "${workspaceFolder}/disid-api/app.js",
       "autoAttachChildProcesses": true
     }
   ]

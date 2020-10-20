@@ -20,8 +20,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
-
-import { InterceptService } from './intercept.service';
 import { NewOrEditEmployeeComponent } from './new-or-edit-employee/new-or-edit-employee.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewOrEditDepartmentComponent } from './new-or-edit-department/new-or-edit-department.component';
@@ -54,12 +52,6 @@ import { DialogComponent } from './dialog/dialog.component';
     ReactiveFormsModule
   ],
   providers: [
-    InterceptService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptService,
-      multi: true
-    }
   ],
   exports: [
     FormsModule

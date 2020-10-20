@@ -1,6 +1,7 @@
+import { environment } from './../environments/environment';
 import { Department } from './department/department.model';
 import { Employee } from './employee/employee.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -10,8 +11,10 @@ const API_DEPARTMENT_URL = 'api/department';
   providedIn: 'root'
 })
 export class AppService {
-
+  baseUrl = environment.baseUrl;
+  secret = environment.secret;
   constructor( private http: HttpClient ) { }
+  httpHeaders = new HttpHeaders().set('Authorization', this.secret);
   private employeeTemp: Employee;
   private Employee = new BehaviorSubject<Employee>(this.employeeTemp);
   thisEmployeeTemp$ = this.Employee.asObservable();
@@ -29,35 +32,35 @@ export class AppService {
   }
 
   getAllEmployee(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(API_EMPLOYEE_URL);
+    return this.http.get<Employee[]>(`${this.baseUrl}${API_EMPLOYEE_URL}`, { headers: this.httpHeaders } );
   }
 
   createEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(API_EMPLOYEE_URL, employee);
+    return this.http.post<Employee>(`${this.baseUrl}${API_EMPLOYEE_URL}`, employee, { headers: this.httpHeaders } );
   }
 
   updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${API_EMPLOYEE_URL}/${employee._id}`, employee);
+    return this.http.put<Employee>(`${this.baseUrl}${API_EMPLOYEE_URL}/${employee._id}`, employee, { headers: this.httpHeaders } );
   }
 
   deleteEmployee(employee: Employee): Observable<Employee> {
-    return this.http.delete<Employee>(`${API_EMPLOYEE_URL}/${employee._id}`);
+    return this.http.delete<Employee>(`${this.baseUrl}${API_EMPLOYEE_URL}/${employee._id}`, { headers: this.httpHeaders } );
   }
 
 
   deleteDepartment(department: Department): Observable<Department> {
-    return this.http.delete<Department>(`${API_DEPARTMENT_URL}/${department._id}`);
+    return this.http.delete<Department>(`${this.baseUrl}${API_DEPARTMENT_URL}/${department._id}`, { headers: this.httpHeaders } );
   }
 
   getAllDepartment(): Observable<Department[]> {
-    return this.http.get<Department[]>(API_DEPARTMENT_URL);
+    return this.http.get<Department[]>(`${this.baseUrl}${API_DEPARTMENT_URL}`, { headers: this.httpHeaders } );
   }
 
   createDepartment(department: Department): Observable<Department> {
-    return this.http.post<Department>(API_DEPARTMENT_URL, department);
+    return this.http.post<Department>(`${this.baseUrl}${API_DEPARTMENT_URL}`, department, { headers: this.httpHeaders } );
   }
 
   updateDepartment(department: Department): Observable<Department> {
-    return this.http.put<Department>(`${API_DEPARTMENT_URL}/${department._id}`, department);
+    return this.http.put<Department>(`${this.baseUrl}${API_DEPARTMENT_URL}/${department._id}`, department, { headers: this.httpHeaders } );
   }
 }
