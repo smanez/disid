@@ -1,0 +1,29 @@
+.employees {
+  display: flex;
+  justify-content: center;
+  margin-top: 7%;
+  text-align: center;
+  .contenido {
+    .filters {
+      .filter {
+        float: left;
+        margin-right: 5%;
+      }
+      width: 70%;
+      float: left;
+    }
+    .buttons {
+      .mat-stroked-button {
+        margin-right: 0.3em;
+      }
+      float: right;
+      .button-create {
+        float: right;
+      }
+    }
+    .table-employee {
+      clear: both;
+    }
+    width: 70%
+  }
+}

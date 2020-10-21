@@ -20,10 +20,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NewOrEditEmployeeComponent } from './new-or-edit-employee/new-or-edit-employee.component';
+import { NewOrEditEmployeeComponent } from './employee/new-or-edit-employee/new-or-edit-employee.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NewOrEditDepartmentComponent } from './new-or-edit-department/new-or-edit-department.component';
+import { NewOrEditDepartmentComponent } from './department/new-or-edit-department/new-or-edit-department.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
+import { DepartmentListComponent } from './department/department-list/department-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { DialogComponent } from './dialog/dialog.component';
     NewOrEditEmployeeComponent,
     DepartmentComponent,
     NewOrEditDepartmentComponent,
-    DialogComponent
+    DialogComponent,
+    EmployeeListComponent,
+    DepartmentListComponent
   ],
   imports: [
     BrowserModule,

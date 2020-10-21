@@ -1,11 +1,11 @@
-import { Department } from './../department/department.model';
-import { Employee } from './../employee/employee.model';
+import { Department } from '../../department/department.model';
+import { Employee } from '../../employee/employee.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { AppService } from '../app.service';
+import { AppService } from '../../app.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogComponent } from '../dialog/dialog.component';
+import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
